@@ -1,0 +1,121 @@
+---
+title: "R Code Basics"
+subtitle: "BDiB Session 11-February-2021"
+output: html_notebook
+---
+
+<style>
+h1 {background: brown;color: white;padding-left: 7px;}
+h2 {background: grey;color: white;padding-left: 7px;}
+h3 {color: brown;}
+</style>
+
+
+## Scripts  
+***ALWAYS SAVE YOUR CODE IN SCRIPTS !***  
+
+* To document your work (think of them as a data analyst's lab notebook)
+* To quickly repeat an analysis in the future
+* To re-use your code for new analyses
+* To generate reports (rmarkdown scripts)
+
+There are two types of R scripts:  
+
+* Standard R scripts (see `basics.R`)  
+* rmarkdown (`.Rmd`) scripts  
+* Please see rmarkdown.Rmd or rmarkdown.nb.html for details on rmarkdown scripts  
+
+## Data structures (1): scalars and vectors  
+
+* Vectors are simple lists with each item being of the same type.
+* Scalars are really just vectors with a single item.
+* Some useful vectors are 'built' into R:
+* (place the cursor anywhere in a line of code and press Ctrl-Enter to execute
+* the code / Cmd-Enter on a Mac)
+* Results / output will appear in the 'Console' window below the script window.
+
+```{r}
+letters
+```
+
+```{r}
+LETTERS
+```
+
+```{r}
+month.abb
+```
+
+```{r}
+month.name
+```
+
+
+Vectors can be generated using the c() function:
+```{r}
+c(14, 6, 2016, 12)
+```
+
+## Functions  
+***Functions are used to manipulate data*** 
+
+### Standard arithmetic  
+R includes all the standard arithmetic function symbols: + - * / ^  
+```{r}
+3 + 4
+```
+
+```{r}
+300 / 100
+```
+
+```{r}
+10 - 9
+```
+
+```{r}
+2 ^ 4
+```
+
+Modulo:  
+```{r}
+12 %% 5
+```
+
+### Names functions  
+Named R functions are very similar to worksheet functions in Excel:  
+
+1. Each function has a different name  
+2. Function names are always followed by brackets  
+3. Information typed between the brackets are called "arguments"  
+4. Two or more arguments are separated by commas  
+
+To see a list of all (>1200) built-in functions that come with R (aka "base R") type:  
+```{r}
+help(package="base")
+```
+
+So `help()` is a first example of a function. ' package="base" ' is the argument here.
+
+### Some examples of frequently used functions  
+(note how in some the examples we use vectors as arguments)  
+
+```{r}
+c(3, 4, 10)
+```
+
+```{r}
+sum(c(3, 4, 10))
+```
+
+```{r}
+sqrt(121)
+```
+
+```{r}
+mean(c(3, 4, 10))
+median(c(3, 4, 10))
+max(c(3, 4, 10))
+min(c(3, 4, 10))
+```
+
