@@ -1,13 +1,21 @@
 ---
 title: "R Code Basics"
 subtitle: "BDiB Session 11-February-2021"
-output: html_notebook
+author: "Axel Nohturfft"
+date: "`r Sys.Date()`"
+output: 
+  html_notebook:
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 3
+    code_folding: "hide"
 ---
 
 <style>
 h1 {background: brown;color: white;padding-left: 7px;}
 h2 {background: grey;color: white;padding-left: 7px;}
 h3 {color: brown;}
+code {color: chocolate;}
 </style>
 
 
@@ -23,7 +31,7 @@ There are two types of R scripts:
 
 * Standard R scripts (see `basics.R`)  
 * rmarkdown (`.Rmd`) scripts  
-* Please see rmarkdown.Rmd or rmarkdown.nb.html for details on rmarkdown scripts  
+* Please see the `rmarkdown.Rmd` or `rmarkdown.nb.html` files for details on rmarkdown scripts  
 
 ## Data structures (1): scalars and vectors  
 
@@ -430,7 +438,7 @@ Each column can be a different data type:
 # class(mx1)
 ```
 
-GEenrating a data frame 'by hand':
+Generating a data frame 'by hand':
 ```{r}
 df1 <- data.frame(Name=c("Jane", "Jack", "Jaim"),
                   Age=c(5, 12, 30),
@@ -448,5 +456,148 @@ Very large data frames are best viewed in a separate tab:
 View(df1)
 ```
 
+
+### Subsetting (2): Subsetting data frames  
+
+```{r}
+print(df1)
+```
+
+Similar to vectors, extract data from data frames using square brackets;  
+rows and columns are separated by a comma:  
+
+* Rows: number before comma  
+* Columns: number after comma  
+
+Equivalent to "A1" (column A, row 1) in Excel:  
+```{r}
+df1[1,1]
+```
+
+Equivalent to "B3" (column B, row 3) in Excel:  
+```{r}
+df1[3,2]
+```
+
+Leaving the space before the comma blank will return entire columns (all rows):  
+```{r}
+df1[,1]
+```
+
+Accordingly, leaving the space AFTER the comma blank will return entire rows:
+```{r}
+df1[1,]
+```
+
+
+As with vectors, extract several rows/columns using number/index vectors:
+
+* Before comma: `c(2,3)` = rows 2 and 3  
+* After comma: `c(1,3)` = columns 1 and 3  
+
+```{r}
+df1[c(2,3), c(1,3)]
+```
+And again, as wwith vectors, we can also subset with Boolean/logical values:  
+
+* Before comma: **`c(FALSE, TRUE, TRUE)`** =  
+  - Row 1 = FALSE (don't include)  
+  - Row 2 = TRUE (***do*** include)  
+  - Row 3 = TRUE (***do*** include)  
+* After comma: **`c(TRUE, FALSE, TRUE)`** =  
+  - Column 1 = TRUE (***do*** include)  
+  - Column 2 = FALSE (don't include)  
+  - Column 3 = TRUE (***do*** include)  
+  
+```{r}
+df1[c(FALSE, TRUE, TRUE), c(TRUE, FALSE, TRUE)]
+```
+
+### Column names/headers
+
+For data frames the `names()` command refers to column headers:
+```{r}
+names(df1)
+```
+
+
+```{r}
+names(df1) <- c("Nom", "Age", "Femelle")
+df1
+```
+
+We often use the dollar sign to refer to entire column of a data frame (returns a vector):
+```{r}
+df1$Nom
+class(df1$Nom)
+```
+
+Data frames (and matrices) can have row names as well:
+```{r}
+row.names(df1) <- paste0("Row", seq_len(nrow(df1)))
+df1
+```
+
+And similar to vectors, we can use row names and column names to subset data frames:  
+*(NOTE that text always needs to be defined with quotation marks)*  
+
+Select 2 columns (all rows):
+```{r}
+df1[, c("Nom", "Femelle")]
+```
+
+Select rows (all columns):
+```{r}
+df1[c("Row1", "Row3"), ]
+```
+
+Select columns and rows:
+```{r}
+df1[c("Row1", "Row3"), c("Nom", "Femelle")]
+```
+Sometimes code becomes easier to read if index vectors are first stored in a variable; then use the variable to subset the data frame:
+```{r}
+a <- c(2,3)
+b <- c(TRUE, FALSE, TRUE)
+c <- c("Nom", "Age")
+```
+
+```{r}
+df1[a, b]
+```
+
+```{r}
+df1[b, c]
+```
+### Merging ("joining") data frames  
+
+We often need to combine 2 data frames. This can be done with the `merge()` function.  
+
+The data frames to be merged must have at least one column in common. In the example below, both the df2a and df2b data frames share the "Gene" column. The values in the shared column do not have to be in the same order.  
+```{r}
+df2a <- data.frame(
+        Gene = c("ABCG1", "IRF1", "STAT3", "NEU1"),
+        Gene.ID = c(9619, 3659, 6774, 4758)
+)
+df2a
+```
+
+
+```{r}
+df2b <- data.frame(
+        Gene = c("ABCG1", "IRF1", "STAT3", "NEU1"),
+        Gene.Name = c("ATP binding cassette subfamily G member 1",
+                      "interferon regulatory factor 1",
+                      "signal transducer and activator of transcription 3",
+                      "neuraminidase 1"
+                      )
+)
+```
+
+
+```{r}
+df3 <- merge(x=df2a, y=df2b, by="Gene")
+df3
+```
 
 
