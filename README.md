@@ -12,6 +12,7 @@ Translational Medicine - Population Health Research module
 4. Data structures (scalar, vector, matrix, data frame)  
 5. Functions  
 6. Subsetting 1 and 2-dimensional data structures  
+7. Getting help  
 
 
 ## Preparation for the workshop  
