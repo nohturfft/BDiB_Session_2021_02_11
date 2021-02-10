@@ -25,6 +25,7 @@ There are a number of important advantages of using rmarkdown over standard R sc
 
 a. The output genreated by the code chunks (including graphics) appears within the script, rather than in the console window.  
 b. The entire output of an rmarkdown script can be formatted to produce reports in various formats: e.g. html file (web page), Word document, Powerpoint presentation, PDF file, and more.  
+c. RStudio now provides a _Visual Markdown Editor_ (click the compass symbol, top-right above the script window)  
 
 ### R Notebooks  
 The current script will be rendered as an _R Notebook_, which has been defined in the YAML header where it says `output: html_notebook`. If you press the Preview button an html file will be generated that ends in `.nb.html`. That file can be opened in any webbrowser. The html file also stores the original Rmd code file, so you can open it in RStudio, which will extract the original script that was used to generate the nb.html file. R notebooks are thus very useful for genrating attractive, interactive reports that are easy to share.  
@@ -81,6 +82,7 @@ facetcol <- cut(zfacet, nbcol)
 persp(x, y, z, col = color[facetcol], phi = 30, theta = -30)
 par(op)
 ```
+
 ### Interactive graphic  
 ```{r plotly graphic, warning=FALSE}
 if (!require("plotly")) install.packages("plotly")
