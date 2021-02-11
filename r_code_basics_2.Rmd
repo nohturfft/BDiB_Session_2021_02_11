@@ -23,8 +23,12 @@ if (grepl("Linux stats3", system("uname -a", intern=T))) {
 }
 lib.dir <- "/homes/homedirs18/sghms/bms/shares/bdib/BDiB_2020-21/R/packages_R_3.5.3"
 stopifnot(file.exists(lib.dir))
-library(rmarkdown, lib.loc = lib.dir)
+detach("package:rmarkdown", unload = TRUE)
+detach("package:xfun", unload = TRUE)
+detach("package:knitr", unload = TRUE)
+library(xfun, lib.loc = lib.dir)
 library(knitr, lib.loc = lib.dir)
+library(rmarkdown, lib.loc = lib.dir)
 ```
 
 
