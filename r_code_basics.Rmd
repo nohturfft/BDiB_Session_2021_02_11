@@ -11,6 +11,14 @@ output:
     code_folding: "hide"
 ---
 
+YAML header
+
+```{r}
+library(rmarkdown)
+library(knitr)
+```
+
+
 <style>
 h1 {background: brown;color: white;padding-left: 7px;}
 h2 {background: grey;color: white;padding-left: 7px;}
@@ -41,6 +49,8 @@ There are two types of R scripts:
 * (place the cursor anywhere in a line of code and press Ctrl-Enter to execute
 * the code / Cmd-Enter on a Mac)
 * Results / output will appear in the 'Console' window below the script window.
+
+
 
 ```{r}
 letters
